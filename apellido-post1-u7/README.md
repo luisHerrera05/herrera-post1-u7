@@ -123,15 +123,4 @@ Ambos adaptadores reciben y devuelven formatos distintos (PagosUDES: `idTransacc
 ## Conclusiones
 La arquitectura en capas resolvió bien el problema mientras las reglas y los datos vivían en un solo lugar; lo más útil de la Parte 1 fue definir un criterio explícito para ubicar cada regla (¿necesita un colaborador externo?) en lugar de decidir por intuición. La Parte 2 mostró que el punto donde las capas empiezan a tensionarse es la frontera con sistemas externos de contrato variable: ahí la inversión de dependencias del puerto pagó su costo. Lo más difícil de decidir fue que la diferencia entre B y C es más sutil de lo que parece: ambas eliminan el `if`, y la ventaja real de C es aislar el dominio de los detalles de HTTP y de la persistencia, un beneficio que solo se aprecia si el sistema sigue creciendo. Por eso el alcance se limitó a la porción de pago y no se migró el resto del proyecto.
 
-## Capturas de pantalla
-Las capturas están en [`docs/`](docs/) (se reproducen con [`docs/probar-endpoints.sh`](docs/probar-endpoints.sh)):
 
-![Generar multa 201](docs/01-post-201.png)
-![Validación 400](docs/02-post-400.png)
-![Cuarta multa pendiente 409](docs/03-post-409.png)
-![Multa inexistente 404](docs/04-get-404.png)
-![Pago en ventanilla y repetición 409](docs/05-pagar-ventanilla.png)
-![Pago en línea con PagosUDES](docs/06-pagar-en-linea-pagosudes.png)
-![Pago en línea con Wompi](docs/07-pagar-en-linea-wompi.png)
-![Pago rechazado 402](docs/08-pago-rechazado-402.png)
-![mvn clean package - BUILD SUCCESS](docs/09-build-success.png)
